@@ -1,0 +1,96 @@
+import sys
+
+
+conversion_rate = {
+        ("Miles, Kilometers"): 1.60934,
+        ("Kilometers, Miles"): 0.621371,
+        ("Pounds, Kilograms"): 0.453592,
+        ("Kilograms, Pounds"): 2.205,
+        ("Inches, Centimeters"): 2.54,
+        ("Centimeters, Inches"): 0.393701
+    }
+
+def convert(amout, prog, prog2=None, prog3=None):
+    if prog == 'm':
+        if prog2 == 'M':
+            amout = amout * conversion_rate[("Miles, Kilometers")]
+            amout = round(amout, 2)
+            return f'{amout} Kilometers'
+        elif prog2 == 'K':
+            amout = amout * conversion_rate[("Kilometers, Miles")]
+            amout = round(amout, 2)
+            return f'{amout} Miles'
+    elif prog == 'w':
+        if prog2 == 'P':
+            amout = amout * conversion_rate[("Pounds, Kilograms")]
+            amout = round(amout, 2)
+            return f'{amout} Kilograms'
+        elif prog2 == 'K':
+            amout = amout * conversion_rate[("Kilograms, Pounds")]
+            amout = round(amout, 2)
+            return f'{amout} Pounds'
+    elif prog == 'others':
+        if prog3 == 'I':
+            amout = amout * conversion_rate[("Inches, Centimeters")]
+            amout = round(amout, 2)
+            return f'{amout} Centimeters'
+        elif prog3 == 'C':
+            amout = amout * conversion_rate[("Centimeters, Inches")]
+            amout = round(amout, 2)
+            return f'{amout} Inches'
+    return 'Invalid option. Please choose between weight conversion or measure conversion.'
+
+
+
+if __name__ == '__main__':
+    prog = input("Choose between weight conversion ('w') or measure conversion ('m'): ")
+
+    if prog == 'm':
+        prog2 = input("Choose between: Miles -> Kilometers ('M') or Kilometers -> Miles ('K') or ('others'): ")
+
+        if prog2 == 'M':
+            try:
+                amout = float(input('Enter a Mile value: '))
+                print(convert(amout, prog, prog2))
+            except ValueError:
+                print('Enter a correct value')
+
+        elif prog2 == 'K':
+            try:
+                amout = float(input('Enter a Kilometer value: '))
+                print(convert(amout, prog, prog2))
+            except ValueError:
+                print('Enter a correct value')
+
+        elif prog2 == 'others':
+            prog3 = input("Choose between: Inches -> Centimeters ('I') or Centimeters -> Inches ('C'): ")
+            if prog3 == 'I':
+                try:
+                    amout = float(input('Enter a Inche value: '))
+                    print(convert(amout, 'others', None, prog3))  # <-- set prog to 'others'
+                except ValueError:
+                    print('Enter a correct value')
+
+            elif prog3 == 'C':
+                try:
+                    amout = float(input('Enter a Centimeter value: '))
+                    print(convert(amout, 'others', None, prog3))  # <-- set prog to 'others'
+                except ValueError:
+                    print('Enter a correct value')
+
+    if prog == 'w':
+        prog2 = input("Choose between: Kilograms -> Pounds ('K') or Pounds -> Kilograms ('P'): ")
+        if prog2 == 'P':
+            try:
+                amout = float(input('Enter a Pound value: '))
+                print(convert(amout, prog, prog2))
+            except ValueError:
+                print('Enter a correct value')
+
+        if prog2 == 'K':
+            try:
+                amout = float(input('Enter a Kilogram value: '))
+                print(convert(amout, prog, prog2))
+            except ValueError:
+                print('Enter a correct value')
+
